@@ -2,6 +2,8 @@
 env
 venv
 
-train.py
 base64Random
 dataset
+
+howToRun.txt
+final-test

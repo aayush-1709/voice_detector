@@ -33,7 +33,7 @@ async def detect(data: dict, x_api_key: str = Header(None)):
         raise HTTPException(status_code=401, detail="Invalid API key")
 
     try:
-        language = data["language"]
+        # language = data["language"]
         audio_b64 = data["audioBase64"]
 
         audio_bytes = base64.b64decode(audio_b64)
@@ -44,18 +44,10 @@ async def detect(data: dict, x_api_key: str = Header(None)):
 
         classification = "AI_GENERATED" if prob > 0.5 else "HUMAN"
 
-        explanation = (
-            "Synthetic spectral patterns detected"
-            if classification == "AI_GENERATED"
-            else "Natural speech variations detected"
-        )
-
         return {
             "status": "success",
-            "language": language,
             "classification": classification,
             "confidenceScore": float(round(prob, 4)),
-            "explanation": explanation
         }
 
     except Exception as e:
